@@ -36,7 +36,7 @@ export const Thread: FC = () => {
         <ThreadWelcome />
 
         <ThreadPrimitive.Messages
-          components={{ UserMessage, EditComposer, AssistantMessage }}
+          components={{ UserMessage}}
         />
 
         <ThreadPrimitive.If empty={false}>
