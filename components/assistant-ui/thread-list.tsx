@@ -4,27 +4,42 @@ import {
   ThreadListPrimitive,
 } from "@assistant-ui/react";
 import { ArchiveIcon, PlusIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 
 export const ThreadList: FC = () => {
   return (
-    <ThreadListPrimitive.Root className="flex flex-col items-stretch gap-1.5">
+    <ThreadListPrimitive.Root
+      className="flex flex-col gap-2 w-full px-2 sm:px-4 bg-background h-full md:block hidden"
+      id="sidebar"
+    >
       <ThreadListNew />
       <ThreadListItems />
     </ThreadListPrimitive.Root>
   );
 };
 
-const ThreadListNew: FC = () => {
+const ThreadListNew: FC = () => { 
+  const handleNewThread = () => {
+    // Optionally save history before opening new tab
+    const history = JSON.parse(localStorage.getItem("chatHistory") || "[]");
+    const timestamp = new Date().toISOString();
+    history.push({ id: timestamp, title: `Chat on ${timestamp}` });
+    localStorage.setItem("chatHistory", JSON.stringify(history));
+
+    // Open a new tab with the base route or /new
+    window.open("/", "_top");
+  };
+
   return (
-    <ThreadListPrimitive.New asChild>
-      <Button className="data-[active]:bg-muted hover:bg-muted flex items-center justify-start gap-1 rounded-lg px-2.5 py-2 text-start" variant="ghost">
-        <PlusIcon />
-        New Thread
-      </Button>
-    </ThreadListPrimitive.New>
+    <Button
+      onClick={handleNewThread}
+      className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-sm sm:text-base"
+      variant="outline"
+    >
+      <PlusIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+      <span className="hidden sm:inline">New Thread</span>
+    </Button>
   );
 };
 
@@ -34,8 +49,8 @@ const ThreadListItems: FC = () => {
 
 const ThreadListItem: FC = () => {
   return (
-    <ThreadListItemPrimitive.Root className="data-[active]:bg-muted hover:bg-muted focus-visible:bg-muted focus-visible:ring-ring flex items-center gap-2 rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2">
-      <ThreadListItemPrimitive.Trigger className="flex-grow px-3 py-2 text-start">
+    <ThreadListItemPrimitive.Root className="data-[active]:bg-muted hover:bg-muted flex items-center justify-between rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-ring px-2 py-1">
+      <ThreadListItemPrimitive.Trigger className="flex-grow text-sm sm:text-base text-start px-2 py-1">
         <ThreadListItemTitle />
       </ThreadListItemPrimitive.Trigger>
       <ThreadListItemArchive />
@@ -45,7 +60,7 @@ const ThreadListItem: FC = () => {
 
 const ThreadListItemTitle: FC = () => {
   return (
-    <p className="text-sm">
+    <p className="truncate text-sm font-medium text-foreground">
       <ThreadListItemPrimitive.Title fallback="New Chat" />
     </p>
   );
@@ -55,11 +70,11 @@ const ThreadListItemArchive: FC = () => {
   return (
     <ThreadListItemPrimitive.Archive asChild>
       <TooltipIconButton
-        className="hover:text-primary text-foreground ml-auto mr-3 size-4 p-0"
-        variant="ghost"
         tooltip="Archive thread"
+        className="text-foreground hover:text-primary p-1"
+        variant="ghost"
       >
-        <ArchiveIcon />
+        <ArchiveIcon className="h-4 w-4" />
       </TooltipIconButton>
     </ThreadListItemPrimitive.Archive>
   );
