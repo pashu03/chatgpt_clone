@@ -10,7 +10,7 @@ import type { FC as _FC } from "react";
 import {
   ArrowDownIcon,
   CheckIcon,
-  ChevronLeftIcon,
+  ChevronLeftIcon,  
   ChevronRightIcon,
   CopyIcon,
   PencilIcon,
@@ -36,7 +36,7 @@ export const Thread: FC = () => {
         <ThreadWelcome />
 
         <ThreadPrimitive.Messages
-          components={{ UserMessage}}
+          components={{ UserMessage  }}
         />
 
         <ThreadPrimitive.If empty={false}>
@@ -68,7 +68,7 @@ const ThreadWelcome: FC = () => (
   <ThreadPrimitive.Empty>
     <div className="flex w-full max-w-[var(--thread-max-width)] flex-grow flex-col">
       <div className="flex w-full flex-grow flex-col items-center justify-center">
-        <h2 className="text-xl font-semibold text-primary">Welcome 👋</h2>
+        <h2 className="text-xl font-semibold text-primary">Welcome Prasad 👋</h2>
         <p className="mt-2 text-sm text-muted-foreground">How can I help you today?</p>
       </div>
       <ThreadWelcomeSuggestions />
@@ -89,7 +89,7 @@ const ThreadWelcomeSuggestions: FC = () => {
       {suggestions.map((prompt) => (
         <ThreadPrimitive.Suggestion
           key={prompt}
-          className="hover:bg-muted/80 flex grow flex-col items-center justify-center rounded-lg border p-4 text-center transition-colors ease-in shadow-sm"
+          className="hover:bg-muted/800 flex grow flex-col items-center justify-center rounded-lg border p-6 text-center transition-colors ease-in shadow-sm"
           prompt={prompt}
           method="replace"
           autoSend
@@ -97,7 +97,7 @@ const ThreadWelcomeSuggestions: FC = () => {
           <span className="line-clamp-2 text-ellipsis text-sm font-semibold text-muted-foreground">
             {prompt}
           </span>
-        </ThreadPrimitive.Suggestion>
+        </ThreadPrimitive.Suggestion>   
       ))}
     </div>
   );
@@ -169,14 +169,15 @@ const ComposerAction: FC = () => (
 
 const UserMessage: FC = () => (
   <MessagePrimitive.Root className="grid auto-rows-auto grid-cols-[minmax(72px,1fr)_auto] gap-y-2 [&:where(>*)]:col-start-2 w-full max-w-[var(--thread-max-width)] py-4">
-    /* ... */
+    
   </MessagePrimitive.Root>
 );
 
-/* ... rest of the file ... */
+
+
 
 const CircleStopIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="126">
     <rect width="10" height="10" x="3" y="3" rx="2" />
   </svg>
 );
