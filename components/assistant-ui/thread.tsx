@@ -86,7 +86,7 @@ const ThreadWelcomeSuggestions: FC = () => {
   const suggestions = [
     "What is the weather in Tokyo?",
     "What is assistant-ui?",
-    What is the capital of India?
+    "What is the capital of India?",
     "Explain TypeScript in simple terms",
   ];
 
